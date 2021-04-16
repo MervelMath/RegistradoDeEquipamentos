@@ -65,20 +65,26 @@ namespace EquipmentsApp.ConsoleApp
                 if (Name[i] != null) {
 
                     Console.WriteLine($"{Name[i]} - {i}");
-
-                    int index = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine($"Nome: {Name[index]}");
-                    Console.WriteLine($"Preço: {Price[index]}");
-                    Console.WriteLine($"Nome do fabricane: {Factoryname[index]}");
-                    Console.WriteLine($"Data de fabricação: {ManufacturingDate[index]}");
                 }
-                
+
             }
             
+            int index = int.Parse(Console.ReadLine());
+            if (Name[index] != null)
+            {
+                Console.WriteLine($"Nome: {Name[index]}");
+                Console.WriteLine($"Preço: {Price[index]}");
+                Console.WriteLine($"Nome do fabricane: {Factoryname[index]}");
+                Console.WriteLine($"Data de fabricação: {ManufacturingDate[index]}");
+            }
+
+            else
+                Console.WriteLine("Não existem produtos registrados neste índice");
+
+            Console.ReadLine();
         }
 
-        public void ChangeEquipConfigs()
+        public void EditEquip()
         {
             Console.WriteLine("Digite o índice do equipamento que deseja alterar:");
             for (int i = 0; i < name.Length; i++)
@@ -90,43 +96,55 @@ namespace EquipmentsApp.ConsoleApp
             }
 
             int index = int.Parse(Console.ReadLine());
+
+            if (Name[index] != null) { 
             Console.WriteLine($"Digite um número para alterar a característica:" +
                 $" \n1 - Nome\n2 - Price\n3- Número de série\n4 - Marca fabricante\n5 Data de fabricação\n0 -sair");
             int check = int.Parse(Console.ReadLine());
-            if (check == 1)
-            {
-                Console.WriteLine("Nome do produto:");
-                Name[index] = Console.ReadLine();
-            }
 
-            else if (check == 2)
+            if (Name[check] != null)
             {
-                Console.WriteLine("Preço do produto:");
-                Price[index] = double.Parse(Console.ReadLine());
-            }
-            else if (check == 3)
-            {
-                Console.WriteLine("Número de série do produto:");
-                Serienumber[index] = int.Parse(Console.ReadLine());
-            }
-            else if (check == 4)
-            {
+                if (check == 1)
+                {
+                    Console.WriteLine("Nome do produto:");
+                    Name[index] = Console.ReadLine();
+                }
 
-                Console.WriteLine("Nome do fabricante do produto:");
-                Factoryname[index] = (Console.ReadLine());
-            }
+                else if (check == 2)
+                {
+                    Console.WriteLine("Preço do produto:");
+                    Price[index] = double.Parse(Console.ReadLine());
+                }
+                else if (check == 3)
+                {
+                    Console.WriteLine("Número de série do produto:");
+                    Serienumber[index] = int.Parse(Console.ReadLine());
+                }
+                else if (check == 4)
+                {
 
-            else if (check == 5)
-            {
-                Console.WriteLine("Dia de fabricação:");
-                int day = int.Parse(Console.ReadLine());
-                Console.WriteLine("Mês:");
-                int month = int.Parse(Console.ReadLine());
-                Console.WriteLine("Ano:");
-                int year = int.Parse(Console.ReadLine());
-                Console.ReadLine();
-                Today[index] = new DateTime(year, month, day);
+                    Console.WriteLine("Nome do fabricante do produto:");
+                    Factoryname[index] = (Console.ReadLine());
+                }
+
+                else if (check == 5)
+                {
+                    Console.WriteLine("Dia de fabricação:");
+                    int day = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Mês:");
+                    int month = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Ano:");
+                    int year = int.Parse(Console.ReadLine());
+                    Console.ReadLine();
+                    Today[index] = new DateTime(year, month, day);
+                }
+                }
             }
+            else
+            {
+                Console.WriteLine("Não há equipamento registrado neste índice.");
+            }
+            Console.ReadLine();
         }
 
         public void Remove()
@@ -142,8 +160,17 @@ namespace EquipmentsApp.ConsoleApp
 
 
             int index = int.Parse(Console.ReadLine());
-            Name[index] = null;
-            Console.WriteLine("Equipamento removido");
+
+            if (Name[index] != null)
+            {
+                Name[index] = null;
+                Console.WriteLine("Equipamento removido");
+            }
+            else
+            {
+                Console.WriteLine("Não existe equipamento registrado nesse índice.");
+            }
+            Console.ReadLine();
         }
 
         public void AddKeeping()
@@ -158,25 +185,32 @@ namespace EquipmentsApp.ConsoleApp
 
             int index = int.Parse(Console.ReadLine());
 
-            Console.WriteLine($"A manutenção será marcada para o equipamento { Name[index]}");
+            if (Name[index] != null)
+            {
+                Console.WriteLine($"A manutenção será marcada para o equipamento { Name[index]}");
 
-            Console.WriteLine("Digite um título para o chamado:");
-            CallKeeping[index] = Console.ReadLine();
+                Console.WriteLine("Digite um título para o chamado:");
+                CallKeeping[index] = Console.ReadLine();
 
-            Console.WriteLine("Digite uma descrição para o chamado:");
-            KeepingDescription[index] = Console.ReadLine();
+                Console.WriteLine("Digite uma descrição para o chamado:");
+                KeepingDescription[index] = Console.ReadLine();
 
-            Console.WriteLine("Digite o dia para a manutenção: ");
-            int day = int.Parse(Console.ReadLine());
+                Console.WriteLine("Digite o dia para a manutenção: ");
+                int day = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("O mês: ");
-            int month = int.Parse(Console.ReadLine());
+                Console.WriteLine("O mês: ");
+                int month = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Digite e o ano: ");
-            int year = int.Parse(Console.ReadLine());
+                Console.WriteLine("Digite e o ano: ");
+                int year = int.Parse(Console.ReadLine());
 
-            KeepingDate[index] = new DateTime(year, month, day);
-
+                KeepingDate[index] = new DateTime(year, month, day);
+            }
+            else
+            {
+                Console.WriteLine("Não há equipamento registrado nesse índice.");
+            }
+            Console.ReadLine();
         }
 
         public void ShowKeeping()
@@ -192,6 +226,7 @@ namespace EquipmentsApp.ConsoleApp
             }
             if (cont != callKeeping.Length)
             {
+
                 Console.WriteLine("Digite o índice do equipamento que deseja visualizar o chamado:");
                 for (int i = 0; i < name.Length; i++)
                 {
@@ -202,18 +237,25 @@ namespace EquipmentsApp.ConsoleApp
                 }
 
                 int index = int.Parse(Console.ReadLine());
-
-                Console.WriteLine(CallKeeping[index]);
-                Console.WriteLine(KeepingDescription[index]);
-                Console.WriteLine($"Data de abertura {KeepingDate[index]}");
-                TimeSpan Calcdifference = (DateTime.Now).Subtract(KeepingDate[index]);
-                int daysDifference = Convert.ToInt32(Calcdifference.TotalDays);
-                Console.WriteLine($"Número de dias desde que a manutenção foi marcada: {daysDifference}");
+                if (Name[index] != null)
+                {
+                    Console.WriteLine(CallKeeping[index]);
+                    Console.WriteLine(KeepingDescription[index]);
+                    Console.WriteLine($"Data de abertura {KeepingDate[index]}");
+                    TimeSpan Calcdifference = (DateTime.Now).Subtract(KeepingDate[index]);
+                    int daysDifference = Convert.ToInt32(Calcdifference.TotalDays);
+                    Console.WriteLine($"Número de dias desde que a manutenção foi marcada: {daysDifference}");
+                }
+                else
+                {
+                    Console.WriteLine("Não há equipamento registrado nesse índice.");
+                }
             }
             else
             {
                 Console.WriteLine("Você não tem manutenções agendadas.");
             }
+            Console.ReadLine();
         }
 
         public void EditKeeping()
@@ -227,38 +269,46 @@ namespace EquipmentsApp.ConsoleApp
                 }
             }
 
+            
             int index = int.Parse(Console.ReadLine());
-
-            Console.WriteLine($"A manutenção será editada para o equipamento { Name[index]}");
-
-            Console.WriteLine("O que deseja alterar: \n1 - Título \n2 - Descrição\n3 Data");
-            int checker = int.Parse(Console.ReadLine());
-            if (checker == 1)
+            if (Name[index] != null)
             {
-                Console.WriteLine("Digite um título para o chamado:");
-                CallKeeping[index] = Console.ReadLine();
-            }
+                Console.WriteLine($"A manutenção será editada para o equipamento { Name[index]}");
 
-            else if (checker == 2)
+                Console.WriteLine("O que deseja alterar: \n1 - Título \n2 - Descrição\n3 Data");
+                int checker = int.Parse(Console.ReadLine());
+                if (checker == 1)
+                {
+                    Console.WriteLine("Digite um título para o chamado:");
+                    CallKeeping[index] = Console.ReadLine();
+                }
+
+                else if (checker == 2)
+                {
+                    Console.WriteLine("Digite uma descrição para o chamado:");
+                    KeepingDescription[index] = Console.ReadLine();
+                }
+
+                else if (checker == 3)
+                {
+                    Console.WriteLine("Digite o dia para a manutenção: ");
+                    int day = int.Parse(Console.ReadLine());
+
+
+                    Console.WriteLine("O mês: ");
+                    int month = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Digite e o ano: ");
+                    int year = int.Parse(Console.ReadLine());
+
+                    KeepingDate[index] = new DateTime(year, month, day);
+                }
+            }
+            else
             {
-                Console.WriteLine("Digite uma descrição para o chamado:");
-                KeepingDescription[index] = Console.ReadLine();
+                Console.WriteLine("Não há equipamento registrado nesse índice.");
             }
-
-            else if (checker == 3)
-            {
-                Console.WriteLine("Digite o dia para a manutenção: ");
-                int day = int.Parse(Console.ReadLine());
-
-
-                Console.WriteLine("O mês: ");
-                int month = int.Parse(Console.ReadLine());
-
-                Console.WriteLine("Digite e o ano: ");
-                int year = int.Parse(Console.ReadLine());
-
-                KeepingDate[index] = new DateTime(year, month, day);
-            }
+            Console.ReadLine();
         }
 
         public void RemoveKeeping()
@@ -271,9 +321,17 @@ namespace EquipmentsApp.ConsoleApp
                     Console.WriteLine($"{Name[i]} - {i}");
                 }
             }
-            int index = int.Parse(Console.ReadLine());
 
-            CallKeeping[index] = null;
+            int index = int.Parse(Console.ReadLine());
+            if (CallKeeping[index] != null)
+            {
+                CallKeeping[index] = null;
+            }
+            else
+            {
+                Console.WriteLine("Não há agendamento registrado nesse índice.");
+            }
+            Console.ReadLine();
         }
 
 
