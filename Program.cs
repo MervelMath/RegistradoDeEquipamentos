@@ -33,8 +33,11 @@ namespace EquipmentsApp.ConsoleApp
 
         private static void StartApp(out string name, out double price, out int serieNumber, out string mark, out int d, out int m, out int a)
         {
-            Console.WriteLine("Digite o nome do primeiro equipamento: ");
-            name = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Digite o nome do primeiro equipamento (precisa ter mais que 6 caracteres): ");
+                name = Console.ReadLine();
+            } while (name.Length < 6);
             Console.WriteLine("Quanto ele custou (digite somente o valor numérico)?");
             price = double.Parse(Console.ReadLine());
             Console.WriteLine("Digite o número de série do equipamento: ");

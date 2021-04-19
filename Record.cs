@@ -9,9 +9,9 @@ namespace EquipmentsApp.ConsoleApp
     class Record
     {
         const int nmbrOfRegisters = 100;
-        private string[] name = new string [nmbrOfRegisters];
+        private string[] name = new string[nmbrOfRegisters];
         private double[] price = new double[nmbrOfRegisters];
-        private int[] serienumber = new int [nmbrOfRegisters];
+        private int[] serienumber = new int[nmbrOfRegisters];
         private string[] factoryname = new string[nmbrOfRegisters];
         private DateTime[] manufacturingDate = new DateTime[nmbrOfRegisters];
         private int counter = 0;
@@ -35,8 +35,12 @@ namespace EquipmentsApp.ConsoleApp
         public void AddEquips()
         {
             this.counter++;
-            Console.WriteLine("Nome do produto:");
-            Name[counter] = Console.ReadLine();
+
+            do
+            {
+                Console.WriteLine("Nome do produto (precisa ter mais de 6 caracteres):");
+                Name[counter] = Console.ReadLine();
+            } while (Name[counter].Length < 6);
 
             Console.WriteLine("Preço do produto:");
             Price[counter] = double.Parse(Console.ReadLine());
@@ -62,13 +66,14 @@ namespace EquipmentsApp.ConsoleApp
             Console.WriteLine("Digite o índice do equipamento que deseja visualizar:");
             for (int i = 0; i < nmbrOfRegisters; i++)
             {
-                if (Name[i] != null) {
+                if (Name[i] != null)
+                {
 
                     Console.WriteLine($"{Name[i]} - {i}");
                 }
 
             }
-            
+
             int index = int.Parse(Console.ReadLine());
             if (Name[index] != null)
             {
@@ -97,47 +102,51 @@ namespace EquipmentsApp.ConsoleApp
 
             int index = int.Parse(Console.ReadLine());
 
-            if (Name[index] != null) { 
-            Console.WriteLine($"Digite um número para alterar a característica:" +
-                $" \n1 - Nome\n2 - Price\n3- Número de série\n4 - Marca fabricante\n5 Data de fabricação\n0 -sair");
-            int check = int.Parse(Console.ReadLine());
-
-            if (Name[check] != null)
+            if (Name[index] != null)
             {
-                if (check == 1)
-                {
-                    Console.WriteLine("Nome do produto:");
-                    Name[index] = Console.ReadLine();
-                }
+                Console.WriteLine($"Digite um número para alterar a característica:" +
+                    $" \n1 - Nome\n2 - Price\n3 - Número de série\n4 - Marca fabricante\n5 Data de fabricação\n0 -sair");
+                int check = int.Parse(Console.ReadLine());
 
-                else if (check == 2)
+                if (Name[index] != null)
                 {
-                    Console.WriteLine("Preço do produto:");
-                    Price[index] = double.Parse(Console.ReadLine());
-                }
-                else if (check == 3)
-                {
-                    Console.WriteLine("Número de série do produto:");
-                    Serienumber[index] = int.Parse(Console.ReadLine());
-                }
-                else if (check == 4)
-                {
+                    if (check == 1)
+                    {
+                        do
+                        {
+                            Console.WriteLine("Nome do produto (precisa ter mais de 6 caracteres):");
+                            Name[index] = Console.ReadLine();
+                        } while (Name[counter].Length < 6);
+                    }
 
-                    Console.WriteLine("Nome do fabricante do produto:");
-                    Factoryname[index] = (Console.ReadLine());
-                }
+                    else if (check == 2)
+                    {
+                        Console.WriteLine("Preço do produto:");
+                        Price[index] = double.Parse(Console.ReadLine());
+                    }
+                    else if (check == 3)
+                    {
+                        Console.WriteLine("Número de série do produto:");
+                        Serienumber[index] = int.Parse(Console.ReadLine());
+                    }
+                    else if (check == 4)
+                    {
 
-                else if (check == 5)
-                {
-                    Console.WriteLine("Dia de fabricação:");
-                    int day = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Mês:");
-                    int month = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Ano:");
-                    int year = int.Parse(Console.ReadLine());
-                    Console.ReadLine();
-                    Today[index] = new DateTime(year, month, day);
-                }
+                        Console.WriteLine("Nome do fabricante do produto:");
+                        Factoryname[index] = (Console.ReadLine());
+                    }
+
+                    else if (check == 5)
+                    {
+                        Console.WriteLine("Dia de fabricação:");
+                        int day = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Mês:");
+                        int month = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Ano:");
+                        int year = int.Parse(Console.ReadLine());
+                        Console.ReadLine();
+                        Today[index] = new DateTime(year, month, day);
+                    }
                 }
             }
             else
@@ -178,7 +187,8 @@ namespace EquipmentsApp.ConsoleApp
             Console.WriteLine("Digite o índice do equipamento que deseja agendar uma manutenção:");
             for (int i = 0; i < name.Length; i++)
             {
-                if (Name[i] != null) {
+                if (Name[i] != null)
+                {
                     Console.WriteLine($"{Name[i]} - {i}");
                 }
             }
@@ -269,7 +279,7 @@ namespace EquipmentsApp.ConsoleApp
                 }
             }
 
-            
+
             int index = int.Parse(Console.ReadLine());
             if (Name[index] != null)
             {
